@@ -19,7 +19,7 @@ public class TriviagameLoop : MonoBehaviour {
         }
     }
 
-    private Question currentQuestion = new Question("What is your favorite color ? ",new string[]{"blue", "red", "yellow", "green", "pink"},0);
+    private Question currentQuestion = new Question(" ",new string[]{" ", " ", " ", " ", " "},0);
     public Button[] answerButtons;
     public Text questionText;
     private int currentQuestionIndex;
@@ -32,10 +32,11 @@ public class TriviagameLoop : MonoBehaviour {
     private Question[] questions = new Question[10];
     private bool allowSelection = true;
     public GameObject feedbackText;
+    public int questionNum;
 
 	// Use this for initialization
 	void Start () {
-        for (int i = 0; i < questionNumbersChosen.Length; i++)
+        for (int i = 0; i < questionNumbersChosen.Length; i++) // Avoid the 0 auto fill when tab declaration
         {
             questionNumbersChosen[i] = -1;
         }
@@ -62,10 +63,10 @@ public class TriviagameLoop : MonoBehaviour {
     void assignQuestion(int questionNum) // Set up interface to show a question
     {
         currentQuestion = questions[questionNum];
-        questionText.text = currentQuestion.questionText;
+        questionText.text = currentQuestion.questionText; // Disp question
         for (int i = 0; i < answerButtons.Length; i++)
         {
-            answerButtons[i].GetComponentInChildren<Text>().text = currentQuestion.answers[i];
+            answerButtons[i].GetComponentInChildren<Text>().text = currentQuestion.answers[i]; // Disp answers
         }
     }
 
@@ -93,13 +94,13 @@ public class TriviagameLoop : MonoBehaviour {
     {
         for (int i = 0; i < questionNumbersChosen.Length; i++)
         {
-            int questionNum = Random.Range(0, questions.Length);
+            questionNum = Random.Range(0, questions.Length); // Random choice of a question
             if (numberNotContained(questionNumbersChosen, questionNum))
                 questionNumbersChosen[i] = questionNum;
             else 
-                i--;
+                i--; // Redo the random selection
         }
-        currentQuestionIndex = Random.Range (0, questions.Length);
+        currentQuestionIndex = Random.Range (0, questions.Length); // Order
     }
 
     bool numberNotContained(int[] numbers, int num) // Securing random questions everytime
