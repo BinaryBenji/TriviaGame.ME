@@ -32,6 +32,8 @@ public class TriviagameLoop : MonoBehaviour {
     private Question[] questions = new Question[10];
     private bool allowSelection = true;
     public GameObject feedbackText;
+    public GameObject lefttext;
+    public GameObject righttext;
     public int questionNum;
 
 	// Use this for initialization
@@ -80,12 +82,20 @@ public class TriviagameLoop : MonoBehaviour {
                 numberOfCorrectAnswers++;
                 feedbackText.GetComponent<Text>().text = "OK";
                 feedbackText.GetComponent<Text>().color = Color.green;
+                lefttext.GetComponent<Text>().text = "OK";
+                lefttext.GetComponent<Text>().color = Color.green;
+                righttext.GetComponent<Text>().text = "OK";
+                righttext.GetComponent<Text>().color = Color.green;
             }
             else
             {
                 print("Incorrect :( ");
                 feedbackText.GetComponent<Text>().text = "KO";
                 feedbackText.GetComponent<Text>().color = Color.red;
+                lefttext.GetComponent<Text>().text = "KO";
+                lefttext.GetComponent<Text>().color = Color.red;
+                righttext.GetComponent<Text>().text = "KO";
+                righttext.GetComponent<Text>().color = Color.red;
             }
             StartCoroutine("continueAfterFeedback");
         }
@@ -156,6 +166,8 @@ public class TriviagameLoop : MonoBehaviour {
     {
         allowSelection = false; // No selection possible after picking one answer
         feedbackText.SetActive(true); // OK or KO
+        righttext.SetActive(true);
+        lefttext.SetActive(true);
         yield return new WaitForSeconds(1.0f); // Wait 1 second
         if (questionsFinished < questionNumbersChosen.Length - 1) // While we are not finished, disp questions
         {
@@ -173,6 +185,8 @@ public class TriviagameLoop : MonoBehaviour {
         }
         allowSelection = true;
         feedbackText.SetActive(false); // OK or KO
+        righttext.SetActive(false);
+        lefttext.SetActive(false);
     }
 
     void quitGame() // Quits
