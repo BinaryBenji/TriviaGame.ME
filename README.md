@@ -1,2 +1,5 @@
 # TriviaGame.ME
-My first C# Unity Game =)
+
+A little (funny) interactive questionnaire. <br/>
+ESC to quit the program. <br/><br/>
+Made with Unity Personnal Edition
